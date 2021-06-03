@@ -1,0 +1,9 @@
+{
+	"typ": "Function",
+	"nazwa": "tablica",
+	"argumenty": [],
+	"instrukcja": {
+		"typ": "Wartosc",
+		"wartosc": [1, 2, 3, 4, 5]
+	}
+}

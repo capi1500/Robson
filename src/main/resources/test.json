@@ -1,0 +1,33 @@
+{
+	"typ":"Blok",
+	"instrukcje":[
+		{
+			"typ": "Function",
+			"nazwa": "kwadrat",
+			"argumenty": [
+				"liczba"
+			],
+			"instrukcja": {
+				"typ": "Razy",
+				"argument1": {
+					"typ": "Zmienna",
+					"nazwa": "liczba"
+				},
+				"argument2": {
+					"typ": "Zmienna",
+					"nazwa": "liczba"
+				}
+			}
+		},
+		{
+			"typ": "Call",
+			"nazwa": "kwadrat",
+			"argumenty": [
+				{
+					"typ": "Liczba",
+					"wartosc": 5.0
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,33 @@
+{
+	"type": "Block",
+	"instructions":[
+		{
+			"type": "Function",
+			"name": "square",
+			"args": [
+				"n"
+			],
+			"instruction": {
+				"type": "Multiply",
+				"arg1": {
+					"type": "Variable",
+					"name": "n"
+				},
+				"arg2": {
+					"type": "Variable",
+					"name": "n"
+				}
+			}
+		},
+		{
+			"type": "Call",
+			"name": "square",
+			"args": [
+				{
+					"type": "Value",
+					"value": 5.0
+				}
+			]
+		}
+	]
+}
