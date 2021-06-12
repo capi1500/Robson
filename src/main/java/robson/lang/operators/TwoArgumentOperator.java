@@ -1,7 +1,7 @@
 package robson.lang.operators;
 
 import com.google.gson.annotations.SerializedName;
-import robson.interfaces.Expresion;
+import robson.lang.base.Expresion;
 
 public abstract class TwoArgumentOperator implements Expresion{
 	@SerializedName(value = "argument1", alternate = {"arg1"})

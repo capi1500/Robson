@@ -2,7 +2,6 @@ package robson.lang.base;
 
 import com.google.gson.annotations.SerializedName;
 import robson.lang.environment.Scope;
-import robson.interfaces.Expresion;
 
 public class Value implements Expresion{
 	@SerializedName(value = "wartosc", alternate = {"value"})

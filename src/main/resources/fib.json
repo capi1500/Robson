@@ -1,6 +1,6 @@
 {
 	"typ":"Funkcja",
-	"nazwa": "fibonaci",
+	"nazwa": "Fibonacci",
 	"argumenty": [
 		"numer"
 	],

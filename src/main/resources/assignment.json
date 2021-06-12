@@ -1,0 +1,8 @@
+{
+	"typ": "Przypisanie",
+	"nazwa": "test",
+	"wartosc": {
+		"typ": "Liczba",
+		"wartosc": 321
+	}
+}

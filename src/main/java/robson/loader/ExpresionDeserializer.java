@@ -5,13 +5,13 @@ import robson.lang.base.FunctionCall;
 import robson.lang.base.Function;
 import robson.lang.base.Value;
 import robson.lang.base.Variable;
-import robson.interfaces.Expresion;
+import robson.lang.base.Expresion;
 import robson.lang.keywords.*;
 import robson.lang.operators.*;
 
 import java.lang.reflect.Type;
 
-public class Deserializer implements JsonDeserializer<Expresion>{
+public class ExpresionDeserializer implements JsonDeserializer<Expresion>{
 	@Override
 	public Expresion deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException{
 		JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -30,6 +30,7 @@ public class Deserializer implements JsonDeserializer<Expresion>{
 			case "Liczba", "Wartosc", "Value" -> Value.class;
 			case "Zmienna", "Variable" -> Variable.class;
 			case "Przypisanie", "Assignment" -> Assignment.class;
+			case "Wez", "Access" -> Access.class;
 			case "Blok", "Block" -> Block.class;
 			case "Jesli", "Jezeli", "If" -> If.class;
 			case "Dopoki", "While" -> While.class;
@@ -39,6 +40,7 @@ public class Deserializer implements JsonDeserializer<Expresion>{
 			case "Minus", "Subtract", "-" -> Subtract.class;
 			case "Razy", "Multiply", "*" -> Multiply.class;
 			case "Dzielenie", "Divide", "/" -> Divide.class;
+			case "Modulo", "%" -> Modulo.class;
 			case "I", "And", "&&" -> And.class;
 			case "Lub", "Or", "||" -> Or.class;
 			case "Nie", "Not", "!" -> Not.class;

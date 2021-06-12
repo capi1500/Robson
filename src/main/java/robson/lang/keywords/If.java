@@ -1,10 +1,10 @@
 package robson.lang.keywords;
 
 import com.google.gson.annotations.SerializedName;
-import robson.interfaces.Expresion;
+import robson.lang.base.Expresion;
 import robson.lang.base.Value;
 import robson.lang.environment.Scope;
-import utils.type_traits.TypeCheck;
+import utils.TypeCheck;
 
 public class If implements Expresion{
 	@SerializedName(value = "warunek", alternate = {"predicate"})
@@ -17,7 +17,7 @@ public class If implements Expresion{
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{
 		Object predicateValue = predicate.calculate(scope).getValue();
-		TypeCheck.assertBoolean(predicateValue);
+		TypeCheck.assertType(predicateValue, Boolean.class);
 		Scope nestedScope = new Scope(scope);
 		if((Boolean)predicateValue)
 			return onTrue.calculate(nestedScope);

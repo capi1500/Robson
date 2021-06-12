@@ -1,0 +1,33 @@
+{
+	"typ": "Blok",
+	"instrukcje": [
+		{
+			"typ": "Przypisanie",
+			"nazwa": "test",
+			"wartosc": {
+				"typ": "Liczba",
+				"wartosc": 321
+			}
+		},
+		{
+			"typ": "Przypisanie",
+			"nazwa": "test2",
+			"wartosc": {
+				"typ": "Liczba",
+				"wartosc": 123
+			}
+		},
+		{
+			"typ": "Przypisanie",
+			"nazwa": "test",
+			"wartosc": {
+				"typ": "Liczba",
+				"wartosc": 205
+			}
+		},
+		{
+			"typ": "Zmienna",
+			"nazwa": "test"
+		}
+	]
+}

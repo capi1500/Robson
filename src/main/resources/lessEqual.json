@@ -1,0 +1,58 @@
+{
+	"typ": "If",
+	"warunek": {
+		"typ": "<=",
+		"argument1": {
+			"typ": "Liczba",
+			"wartosc": 1
+		},
+		"argument2": {
+			"typ": "Liczba",
+			"wartosc": 2
+		}
+	},
+	"blok_prawda": {
+		"typ": "If",
+		"warunek": {
+			"typ": "<=",
+			"argument1": {
+				"typ": "Liczba",
+				"wartosc": 2
+			},
+			"argument2": {
+				"typ": "Liczba",
+				"wartosc": 1
+			}
+		},
+		"blok_prawda": {
+			"typ": "Liczba",
+			"wartosc": 0
+		},
+		"blok_falsz": {
+			"typ": "If",
+			"warunek": {
+				"typ": "<=",
+				"argument1": {
+					"typ": "Liczba",
+					"wartosc": 1
+				},
+				"argument2": {
+					"typ": "Liczba",
+					"wartosc": 1
+				}
+			},
+			"blok_prawda": {
+				"typ": "Liczba",
+				"wartosc": 1
+			},
+			"blok_falsz": {
+				"typ": "Liczba",
+				"wartosc": 2
+			}
+		}
+	},
+	"blok_falsz": {
+		"typ": "Liczba",
+		"wartosc": 3
+	}
+}

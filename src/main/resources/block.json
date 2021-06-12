@@ -1,0 +1,13 @@
+{
+	"typ": "Blok",
+	"instrukcje": [
+		{
+			"typ": "Liczba",
+			"wartosc": 3
+		},
+		{
+			"typ": "Liczba",
+			"wartosc": -6
+		}
+	]
+}

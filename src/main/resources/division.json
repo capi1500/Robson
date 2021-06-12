@@ -1,0 +1,11 @@
+{
+	"typ": "Dzielenie",
+	"argument1":{
+		"wartosc": 7,
+		"typ": "Liczba"
+	},
+	"argument2":{
+		"wartosc": 8.0,
+		"typ": "Liczba"
+	}
+}

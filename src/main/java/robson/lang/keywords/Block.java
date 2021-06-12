@@ -3,7 +3,7 @@ package robson.lang.keywords;
 import com.google.gson.annotations.SerializedName;
 import robson.lang.base.Value;
 import robson.lang.environment.Scope;
-import robson.interfaces.Expresion;
+import robson.lang.base.Expresion;
 
 import java.util.Arrays;
 

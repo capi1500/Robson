@@ -2,7 +2,6 @@ package robson.lang.base;
 
 import com.google.gson.annotations.SerializedName;
 import robson.lang.environment.Scope;
-import robson.interfaces.Expresion;
 
 import java.util.Arrays;
 
@@ -16,7 +15,7 @@ public class Function implements Expresion{
 	@SerializedName(value = "lokalna", alternate = {"local"})
 	private boolean local = false;
 	
-	private Scope baseScope;
+	transient private Scope baseScope;
 	
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{

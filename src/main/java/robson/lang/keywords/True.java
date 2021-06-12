@@ -1,6 +1,6 @@
 package robson.lang.keywords;
 
-import robson.interfaces.Expresion;
+import robson.lang.base.Expresion;
 import robson.lang.base.Value;
 import robson.lang.environment.Scope;
 

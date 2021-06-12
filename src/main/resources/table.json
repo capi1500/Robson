@@ -1,9 +1,18 @@
 {
 	"typ": "Function",
-	"nazwa": "tablica",
-	"argumenty": [],
-	"instrukcja": {
-		"typ": "Wartosc",
-		"wartosc": [1, 2, 3, 4, 5]
+	"name": "get",
+	"argumenty": [
+		"id"
+	],
+	"instruction": {
+		"typ": "Access",
+		"instrukcja": {
+			"typ": "Wartosc",
+			"wartosc": [1, 2, 3, 4, 5]
+		},
+		"indeks": {
+			"typ": "Variable",
+			"name": "id"
+		}
 	}
 }

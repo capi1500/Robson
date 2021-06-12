@@ -1,0 +1,30 @@
+{
+	"typ": "If",
+	"warunek": {
+		"typ": "Not",
+		"argument": {
+			"typ": "True"
+		}
+	},
+	"blok_prawda": {
+		"typ": "Liczba",
+		"wartosc": 0
+	},
+	"blok_falsz": {
+		"typ": "If",
+		"warunek": {
+			"typ": "Not",
+			"argument": {
+				"typ": "False"
+			}
+		},
+		"blok_prawda": {
+			"typ": "Liczba",
+			"wartosc": 1
+		},
+		"blok_falsz": {
+			"typ": "Liczba",
+			"wartosc": 2
+		}
+	}
+}

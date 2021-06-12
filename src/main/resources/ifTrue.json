@@ -1,0 +1,14 @@
+{
+	"typ": "If",
+	"warunek": {
+		"typ": "True"
+	},
+	"blok_prawda": {
+		"typ": "Liczba",
+		"wartosc": 1
+	},
+	"blok_falsz": {
+		"typ": "Liczba",
+		"wartosc": 0
+	}
+}

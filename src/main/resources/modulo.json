@@ -1,0 +1,11 @@
+{
+	"typ": "Modulo",
+	"argument1":{
+		"wartosc": 8,
+		"typ": "Liczba"
+	},
+	"argument2":{
+		"wartosc": 5,
+		"typ": "Liczba"
+	}
+}

@@ -1,18 +1,11 @@
 package robson.lang.operators;
 
-import robson.lang.base.Value;
-import robson.lang.environment.Scope;
-import utils.type_traits.TypeCheck;
+import utils.NumericalOperations;
 
-public class Subtract extends TwoArgumentOperator{
+public class Subtract extends ArithmeticOperator{
 	@Override
-	public Value calculate(Scope scope) throws RuntimeException{
-		Object v1 = arg1.calculate(scope).getValue(), v2 = arg2.calculate(scope).getValue();
-		TypeCheck.assertNumerical(v1);
-		TypeCheck.assertNumerical(v2);
-		if(TypeCheck.isInteger(v1) && TypeCheck.isInteger(v2))
-			return new Value(((Integer)v1) - ((Integer)v2));
-		return new Value(((Double)v1) - ((Double)v2));
+	protected Number operation(Number e1, Number e2){
+		return NumericalOperations.subtract(e1, e2);
 	}
 	
 	@Override

@@ -4,11 +4,11 @@
 		{
 			"typ": "Plus",
 			"argument1":{
-				"wartosc": 7,
+				"wartosc": 7.0,
 				"typ": "Liczba"
 			},
 			"argument2":{
-				"wartosc": 8,
+				"wartosc": 8.0,
 				"typ": "Liczba"
 			}
 		}

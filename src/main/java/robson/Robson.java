@@ -1,18 +1,14 @@
 package robson;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import robson.lang.base.Value;
 import robson.lang.environment.GlobalScope;
 import robson.lang.environment.Scope;
 import robson.exceptions.BladWykonania;
 import robson.exceptions.NieprawidlowyProgram;
-import robson.interfaces.Expresion;
-import robson.loader.Deserializer;
-import robson.loader.ValueDeserializer;
-import utils.type_traits.TypeCheck;
+import robson.lang.base.Expresion;
+import robson.loader.*;
+import utils.TypeCheck;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,8 +20,7 @@ public class Robson{
 	
 	public void fromJson(String filename) throws NieprawidlowyProgram{
 		Gson gson = new GsonBuilder()
-							.registerTypeAdapter(Expresion.class, new Deserializer())
-							.registerTypeAdapter(Value.class, new ValueDeserializer())
+							.registerTypeAdapter(Expresion.class, new ExpresionDeserializer())
 							.create();
 		
 		try{
@@ -34,8 +29,6 @@ public class Robson{
 		catch(FileNotFoundException | JsonIOException | JsonSyntaxException e){
 			throw new NieprawidlowyProgram(e);
 		}
-		
-		System.out.println(script.toString());
 		
 		try{
 			Scope scope = new Scope(globalScope);
@@ -49,7 +42,6 @@ public class Robson{
 		Gson gson = new GsonBuilder()
 							.setPrettyPrinting()
 							.serializeNulls()
-							.registerTypeAdapter(Expresion.class, new Deserializer())
 							.create();
 		
 		try{
@@ -69,23 +61,24 @@ public class Robson{
 		Scope scope = new Scope(globalScope);
 		try{
 			Object out = script.calculate(scope).getValue();
-			if(TypeCheck.isDouble(out))
-				return (double)out;
-			return ((Integer)out).doubleValue();
-		} catch(RuntimeException e){
+			TypeCheck.assertType(out, Number.class);
+			return ((Number)out).doubleValue();
+		}
+		catch(RuntimeException e){
 			throw new BladWykonania(e);
 		}
 	}
 	
-	public Object wykonaj(String name, Object... args) throws BladWykonania{
+	public Object wykonaj(String name, Number... args) throws BladWykonania{
 		Scope scope = new Scope(globalScope);
 		try{
 			Expresion[] exprArgs = new Expresion[args.length];
 			for(int i = 0; i < args.length; i++)
 				exprArgs[i] = new Value(args[i]);
 			
-			return scope.getFunction(name).call(scope, exprArgs);
-		} catch(RuntimeException e){
+			return scope.getFunction(name).call(scope, exprArgs).getValue();
+		}
+		catch(RuntimeException e){
 			throw new BladWykonania(e);
 		}
 	}
