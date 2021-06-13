@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -197,6 +198,11 @@ public class ScriptTests{
 		
 		Files.delete(Path.of("Main.java"));
 		Files.delete(Path.of("out\\out.txt"));
+		
+		Files.walk(Path.of("out\\"))
+				.sorted(Comparator.reverseOrder())
+				.map(Path::toFile)
+				.forEach(File::delete);
 	}
 	
 	@TestFactory
