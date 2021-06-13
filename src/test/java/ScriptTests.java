@@ -4,7 +4,12 @@ import robson.Robson;
 import robson.exceptions.BladWykonania;
 import robson.exceptions.NieprawidlowyProgram;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -158,6 +163,42 @@ public class ScriptTests{
 		}
 	}
 	
+	void toJsonTest(TestConfig config) throws NieprawidlowyProgram, IOException{
+		String generatedPath = "src/main/resources/generated_" + config.getName() + ".json";
+		
+		script.fromJson(config.getPath());
+		script.toJson(generatedPath);
+		Robson script2 = new Robson();
+		script2.fromJson(generatedPath);
+		
+		assertEquals(script, script2);
+		
+		Files.delete(Path.of(generatedPath));
+	}
+	
+	void toJavaTest(TestConfig config) throws NieprawidlowyProgram, IOException, InterruptedException{
+		Robson robson = new Robson();
+		robson.fromJson(config.getPath());
+		robson.toJava("Main.java");
+		
+		new ProcessBuilder("javac", "-d", "out\\", "-classpath", ".\\;libraries\\gson-2.8.7.jar;src\\main\\java\\", "Main.java")
+				.directory(new File(System.getProperty("user.dir")))
+				.start()
+				.waitFor();
+		new ProcessBuilder("java", "-classpath", ".;out\\;libraries\\gson-2.8.7.jar;src\\main\\java\\", "Main")
+				.directory(new File(System.getProperty("user.dir")))
+				.redirectOutput(new File("out\\out.txt"))
+				.start()
+				.waitFor();
+		
+		Scanner output = new Scanner(Path.of("out\\out.txt"));
+		assertEquals(config.getExpectedValue(), Double.parseDouble(output.nextLine()));
+		output.close();
+		
+		Files.delete(Path.of("Main.java"));
+		Files.delete(Path.of("out\\out.txt"));
+	}
+	
 	@TestFactory
 	Stream<DynamicTest> execution(){
 		return Arrays.stream(executionTestConfigs).map(
@@ -174,6 +215,26 @@ public class ScriptTests{
 				testConfig -> DynamicTest.dynamicTest(
 						testConfig.getName(),
 						() -> functionTest(testConfig)
+				)
+		);
+	}
+	
+	@TestFactory
+	Stream<DynamicTest> toJson(){
+		return Stream.concat(Arrays.stream(functionCallTestConfigs), Arrays.stream(executionTestConfigs)).map(
+				testConfig -> DynamicTest.dynamicTest(
+						testConfig.getName(),
+						() -> toJsonTest(testConfig)
+				)
+		);
+	}
+	
+	@TestFactory
+	Stream<DynamicTest> toJava(){
+		return Arrays.stream(executionTestConfigs).map(
+				testConfig -> DynamicTest.dynamicTest(
+						testConfig.getName(),
+						() -> toJavaTest(testConfig)
 				)
 		);
 	}

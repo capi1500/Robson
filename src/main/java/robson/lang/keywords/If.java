@@ -6,7 +6,9 @@ import robson.lang.base.Value;
 import robson.lang.environment.Scope;
 import utils.TypeCheck;
 
-public class If implements Expresion{
+import java.util.Objects;
+
+public class If extends Expresion{
 	@SerializedName(value = "warunek", alternate = {"predicate"})
 	private Expresion predicate;
 	@SerializedName(value = "blok_prawda", alternate = {"expresion_true"})
@@ -25,7 +27,29 @@ public class If implements Expresion{
 	}
 	
 	@Override
-	public String toString(){
-		return "If{" + "predicate=" + predicate + ", onTrue=" + onTrue + ", onFalse=" + onFalse + '}';
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		if(!super.equals(o))
+			return false;
+		
+		If anIf = (If)o;
+		
+		if(!Objects.equals(predicate, anIf.predicate))
+			return false;
+		if(!Objects.equals(onTrue, anIf.onTrue))
+			return false;
+		return Objects.equals(onFalse, anIf.onFalse);
+	}
+	
+	@Override
+	public int hashCode(){
+		int result = super.hashCode();
+		result = 31 * result + (predicate != null ? predicate.hashCode() : 0);
+		result = 31 * result + (onTrue != null ? onTrue.hashCode() : 0);
+		result = 31 * result + (onFalse != null ? onFalse.hashCode() : 0);
+		return result;
 	}
 }

@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName;
 import robson.lang.environment.Scope;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-public class Function implements Expresion{
+public class Function extends Expresion{
 	@SerializedName(value = "nazwa", alternate = {"name"})
 	private String name;
 	@SerializedName(value = "argumenty", alternate = {"args"})
@@ -29,7 +30,7 @@ public class Function implements Expresion{
 			baseScope = new Scope(scope.getGlobalScope());
 		}
 		
-		return new Value(new Integer(0));
+		return new Value(0);
 	}
 	
 	public Value call(Scope scope, Expresion... args) throws RuntimeException{
@@ -45,7 +46,33 @@ public class Function implements Expresion{
 	}
 	
 	@Override
-	public String toString(){
-		return "Function{" + "name='" + name + '\'' + ", argumentNames=" + Arrays.toString(argumentNames) + ", body=" + body + '}';
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		if(!super.equals(o))
+			return false;
+		
+		Function function = (Function)o;
+		
+		if(local != function.local)
+			return false;
+		if(!Objects.equals(name, function.name))
+			return false;
+		// Probably incorrect - comparing Object[] arrays with Arrays.equals
+		if(!Arrays.equals(argumentNames, function.argumentNames))
+			return false;
+		return Objects.equals(body, function.body);
+	}
+	
+	@Override
+	public int hashCode(){
+		int result = super.hashCode();
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + Arrays.hashCode(argumentNames);
+		result = 31 * result + (body != null ? body.hashCode() : 0);
+		result = 31 * result + (local ? 1 : 0);
+		return result;
 	}
 }

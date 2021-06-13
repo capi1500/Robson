@@ -12,7 +12,9 @@ import utils.TypeCheck;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Objects;
 
 public class Robson{
 	private Expresion script;
@@ -24,9 +26,11 @@ public class Robson{
 							.create();
 		
 		try{
-			script = gson.fromJson(new FileReader(filename), Expresion.class);
+			FileReader reader = new FileReader(filename);
+			script = gson.fromJson(reader, Expresion.class);
+			reader.close();
 		}
-		catch(FileNotFoundException | JsonIOException | JsonSyntaxException e){
+		catch(IOException | JsonIOException | JsonSyntaxException e){
 			throw new NieprawidlowyProgram(e);
 		}
 		
@@ -41,12 +45,11 @@ public class Robson{
 	public void toJson(String filename){
 		Gson gson = new GsonBuilder()
 							.setPrettyPrinting()
-							.serializeNulls()
 							.create();
-		
 		try{
 			PrintStream file = new PrintStream(filename);
 			file.println(gson.toJson(script));
+			file.close();
 		}
 		catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -54,7 +57,56 @@ public class Robson{
 	}
 	
 	public void toJava(String filename){
-		
+		try{
+			Gson gson = new GsonBuilder().create();
+			
+			String tmp = gson.toJson(script);
+			StringBuilder program = new StringBuilder();
+			
+			tmp.chars().forEach(c -> {
+				if(c == '"'){
+					program.append('\\');
+					program.append('"');
+				}
+				else 
+					program.append((char)c);
+			});
+			
+			
+			PrintStream file = new PrintStream(filename);
+			file.println("import robson.Robson;\n" +
+						 "import robson.exceptions.BladWykonania;\n" +
+						 "import robson.exceptions.NieprawidlowyProgram;\n" +
+						 "\n" +
+						 "import java.io.IOException;\n" +
+						 "import java.io.PrintStream;\n" +
+						 "import java.nio.file.Files;\n" +
+						 "import java.nio.file.Path;\n" + 
+						 "\n" + 
+						 "public class Main{\n" + 
+						 "\tpublic static void main(String[] args){\n" + 
+						 "\t\ttry{\n" + 
+						 "\t\t\tString program = \"" + new String(program) + "\";\n" + 
+						 "\t\t\tPrintStream printer = new PrintStream(\"tmp.json\");\n" + 
+						 "\t\t\tprinter.println(program);\n" + 
+						 "\t\t\tprinter.close();\n" + 
+						 "\t\t\t\n" + 
+						 "\t\t\tRobson script = new Robson();\n" + 
+						 "\t\t\tscript.fromJson(\"tmp.json\");\n" + 
+						 "\t\t\tSystem.out.println(script.wykonaj());\n" + 
+						 "\t\t\t\n" + 
+						 "\t\t\tFiles.delete(Path.of(\"tmp.json\"));\n" + 
+						 "\t\t} catch(IOException | NieprawidlowyProgram | BladWykonania e){\n" + 
+						 "\t\t\te.printStackTrace();\n" + 
+						 "\t\t}\n" + 
+						 "\t}\n" + 
+						 "}\n"
+			);
+			file.close();
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public double wykonaj() throws BladWykonania{
@@ -81,5 +133,22 @@ public class Robson{
 		catch(RuntimeException e){
 			throw new BladWykonania(e);
 		}
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		
+		Robson robson = (Robson)o;
+		
+		return Objects.equals(script, robson.script);
+	}
+	
+	@Override
+	public int hashCode(){
+		return script != null ? script.hashCode() : 0;
 	}
 }

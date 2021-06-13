@@ -3,7 +3,9 @@ package robson.lang.base;
 import com.google.gson.annotations.SerializedName;
 import robson.lang.environment.Scope;
 
-public class Value implements Expresion{
+import java.util.Objects;
+
+public class Value extends Expresion{
 	@SerializedName(value = "wartosc", alternate = {"value"})
 	private Object value;
 	
@@ -24,19 +26,23 @@ public class Value implements Expresion{
 	}
 	
 	@Override
-	public String toString(){
-		return "Value{" + "value=" + value + '}';
-	}
-	
-	@Override
 	public boolean equals(Object o){
 		if(this == o)
 			return true;
 		if(o == null || getClass() != o.getClass())
 			return false;
+		if(!super.equals(o))
+			return false;
 		
 		Value value1 = (Value)o;
 		
-		return value != null ? value.equals(value1.value) : value1.value == null;
+		return Objects.equals(value, value1.value);
+	}
+	
+	@Override
+	public int hashCode(){
+		int result = super.hashCode();
+		result = 31 * result + (value != null ? value.hashCode() : 0);
+		return result;
 	}
 }

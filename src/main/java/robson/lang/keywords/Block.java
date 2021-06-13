@@ -7,13 +7,13 @@ import robson.lang.base.Expresion;
 
 import java.util.Arrays;
 
-public class Block implements Expresion{
+public class Block extends Expresion{
 	@SerializedName(value = "instrukcje", alternate = {"instructions"})
 	private Expresion[] instructions;
 	
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{
-		Value value = new Value(new Integer(0));
+		Value value = new Value(0);
 		for(Expresion i : instructions){
 			value = i.calculate(scope);
 		}
@@ -21,7 +21,24 @@ public class Block implements Expresion{
 	}
 	
 	@Override
-	public String toString(){
-		return "Block{" + "instructions=" + Arrays.toString(instructions) + '}';
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		if(!super.equals(o))
+			return false;
+		
+		Block block = (Block)o;
+		
+		// Probably incorrect - comparing Object[] arrays with Arrays.equals
+		return Arrays.equals(instructions, block.instructions);
+	}
+	
+	@Override
+	public int hashCode(){
+		int result = super.hashCode();
+		result = 31 * result + Arrays.hashCode(instructions);
+		return result;
 	}
 }

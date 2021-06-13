@@ -10,8 +10,9 @@ import utils.TypeCheck;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Access implements Expresion{
+public class Access extends Expresion{
 	@SerializedName(value = "instrukcja", alternate = {"instruction"})
 	Expresion expresion;
 	@SerializedName(value = "nazwa", alternate = {"name", "field", "pole"})
@@ -65,7 +66,29 @@ public class Access implements Expresion{
 	}
 	
 	@Override
-	public String toString(){
-		return "Access{" + "expresion=" + expresion + ", what='" + what + '\'' + ", id=" + id + '}';
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		if(!super.equals(o))
+			return false;
+		
+		Access access = (Access)o;
+		
+		if(!Objects.equals(expresion, access.expresion))
+			return false;
+		if(!Objects.equals(what, access.what))
+			return false;
+		return Objects.equals(id, access.id);
+	}
+	
+	@Override
+	public int hashCode(){
+		int result = super.hashCode();
+		result = 31 * result + (expresion != null ? expresion.hashCode() : 0);
+		result = 31 * result + (what != null ? what.hashCode() : 0);
+		result = 31 * result + (id != null ? id.hashCode() : 0);
+		return result;
 	}
 }
