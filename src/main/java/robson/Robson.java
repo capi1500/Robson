@@ -35,6 +35,8 @@ public class Robson{
 		}
 		
 		try{
+			globalScope.clear();
+			
 			Scope scope = new Scope(globalScope);
 			script.calculate(scope);
 		} catch(RuntimeException e){
@@ -150,5 +152,10 @@ public class Robson{
 	@Override
 	public int hashCode(){
 		return script != null ? script.hashCode() : 0;
+	}
+	
+	@Override
+	public String toString(){
+		return script.preetyPrint("");
 	}
 }

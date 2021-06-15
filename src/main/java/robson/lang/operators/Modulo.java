@@ -21,4 +21,9 @@ public class Modulo extends TwoArgumentOperator{
 		
 		return new Value(n1.longValue() % n2.longValue());
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		return arg1.preetyPrint(prefix) + " % " + arg2.preetyPrint(prefix);
+	}
 }

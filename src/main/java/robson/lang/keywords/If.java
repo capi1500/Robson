@@ -20,10 +20,10 @@ public class If extends Expresion{
 	public Value calculate(Scope scope) throws RuntimeException{
 		Object predicateValue = predicate.calculate(scope).getValue();
 		TypeCheck.assertType(predicateValue, Boolean.class);
-		Scope nestedScope = new Scope(scope);
+		
 		if((Boolean)predicateValue)
-			return onTrue.calculate(nestedScope);
-		return onFalse.calculate(nestedScope);
+			return onTrue.calculate(new Scope(scope));
+		return onFalse.calculate(new Scope(scope));
 	}
 	
 	@Override
@@ -51,5 +51,23 @@ public class If extends Expresion{
 		result = 31 * result + (onTrue != null ? onTrue.hashCode() : 0);
 		result = 31 * result + (onFalse != null ? onFalse.hashCode() : 0);
 		return result;
+	}
+	
+	@Override
+	public String preetyPrint(String indent){
+		StringBuilder out = new StringBuilder();
+		out.append("if(");
+		out.append(predicate.preetyPrint(indent + "    "));
+		out.append(")");
+		if(onTrue.getClass() != Block.class)
+			out.append("\n" + indent + "    " + onTrue.preetyPrint(indent + "    "));
+		else 
+			out.append(onTrue.preetyPrint(indent));
+		out.append("\n" + indent + "else");
+		if(onTrue.getClass() != Block.class)
+			out.append("\n" + indent + "    " + onFalse.preetyPrint(indent + "    "));
+		else
+			out.append(onFalse.preetyPrint(indent));
+		return out.toString();
 	}
 }

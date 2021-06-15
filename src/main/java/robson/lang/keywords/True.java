@@ -9,4 +9,9 @@ public class True extends Expresion{
 	public Value calculate(Scope scope) throws RuntimeException{
 		return new Value(Boolean.TRUE);
 	}
+	
+	@Override
+	public String preetyPrint(String indent){
+		return "True";
+	}
 }

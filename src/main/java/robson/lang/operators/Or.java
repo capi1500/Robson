@@ -14,7 +14,7 @@ public class Or extends TwoArgumentOperator{
 	}
 	
 	@Override
-	public String toString(){
-		return "Or{" + "arg1=" + arg1 + ", arg2=" + arg2 + '}';
+	public String preetyPrint(String prefix){
+		return arg1.preetyPrint(prefix) + " | " + arg2.preetyPrint(prefix);
 	}
 }

@@ -37,4 +37,9 @@ public class Scope extends Environment{
 	public GlobalScope getGlobalScope(){
 		return globalScope;
 	}
+	
+	@Override
+	public String toString(){
+		return "Scope{" + "variables=" + variables + ", functions=" + functions + ", parent=" + (parent == null ? globalScope : parent) + '}';
+	}
 }

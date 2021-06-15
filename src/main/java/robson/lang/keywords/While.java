@@ -16,13 +16,12 @@ public class While extends Expresion{
 	
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{
-		Scope nestedScope = new Scope(scope);
 		while(true){
 			Object predicateValue = predicate.calculate(scope).getValue();
 			TypeCheck.assertType(predicateValue, Boolean.class);
 			if(!((Boolean)predicateValue))
 				break;
-			expresion.calculate(nestedScope);
+			expresion.calculate(new Scope(scope));
 		}
 		return new Value(0);
 	}
@@ -49,5 +48,18 @@ public class While extends Expresion{
 		result = 31 * result + (predicate != null ? predicate.hashCode() : 0);
 		result = 31 * result + (expresion != null ? expresion.hashCode() : 0);
 		return result;
+	}
+	
+	@Override
+	public String preetyPrint(String indent){
+		StringBuilder out = new StringBuilder();
+		out.append("while(");
+		out.append(predicate.preetyPrint(indent + "    "));
+		out.append(")");
+		if(expresion.getClass() != Block.class)
+			out.append("\n" + indent + "    " + expresion.preetyPrint(indent + "    "));
+		else
+			out.append(expresion.preetyPrint(indent));
+		return out.toString();
 	}
 }

@@ -13,9 +13,10 @@ public class Block extends Expresion{
 	
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{
+		Scope nestedScope = new Scope(scope);
 		Value value = new Value(0);
 		for(Expresion i : instructions){
-			value = i.calculate(scope);
+			value = i.calculate(nestedScope);
 		}
 		return value;
 	}
@@ -40,5 +41,16 @@ public class Block extends Expresion{
 		int result = super.hashCode();
 		result = 31 * result + Arrays.hashCode(instructions);
 		return result;
+	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		StringBuilder out = new StringBuilder();
+		out.append("{\n");
+		for(Expresion expresion : instructions){
+			out.append(prefix + "    " + expresion.preetyPrint(prefix + "    ") + "\n");
+		}
+		out.append(prefix + "}");
+		return out.toString();
 	}
 }

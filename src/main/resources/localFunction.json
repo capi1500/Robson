@@ -1,0 +1,69 @@
+{
+	"typ": "Blok",
+	"instrukcje":[
+		{
+			"typ": "Function",
+			"nazwa": "fun",
+			"argumenty": [
+				"liczba"
+			],
+			"instrukcja": {
+				"typ": "Add",
+				"argument1": {
+					"typ": "Zmienna",
+					"nazwa": "liczba"
+				},
+				"argument2": {
+					"typ": "Zmienna",
+					"nazwa": "liczba"
+				}
+			}
+		},
+		{
+			"typ": "Blok",
+			"instrukcje": [
+				{
+					"typ": "Function",
+					"nazwa": "fun",
+					"lokalna": "True",
+					"argumenty": [
+						"liczba"
+					],
+					"instrukcja": {
+						"typ": "Razy",
+						"argument1": {
+							"typ": "Zmienna",
+							"nazwa": "liczba"
+						},
+						"argument2": {
+							"typ": "Zmienna",
+							"nazwa": "liczba"
+						}
+					}
+				}
+			]
+		},
+		{
+			"typ": "Function",
+			"nazwa": "fun",
+			"lokalna": "True",
+			"argumenty": [
+				"liczba"
+			],
+			"instrukcja": {
+				"typ": "Zmienna",
+				"nazwa": "liczba"
+			}
+		},
+		{
+			"typ": "Call",
+			"nazwa": "fun",
+			"argumenty": [
+				{
+					"typ": "Liczba",
+					"wartosc": 5
+				}
+			]
+		}
+	]
+}

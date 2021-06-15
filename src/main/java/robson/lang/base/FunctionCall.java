@@ -41,4 +41,17 @@ public class FunctionCall extends Expresion{
 		result = 31 * result + Arrays.hashCode(arguments);
 		return result;
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		StringBuilder out = new StringBuilder();
+		out.append(name + "(");
+		for(Expresion arg : arguments){
+			out.append(arg.preetyPrint(prefix));
+			if(!arg.equals(arguments[arguments.length - 1]))
+				out.append(", ");
+		}
+		out.append(")");
+		return out.toString();
+	}
 }

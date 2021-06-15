@@ -9,4 +9,9 @@ public class False extends Expresion{
 	public Value calculate(Scope scope) throws RuntimeException{
 		return new Value(Boolean.FALSE);
 	}
+	
+	@Override
+	public String preetyPrint(String indent){
+		return "False";
+	}
 }

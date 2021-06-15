@@ -9,7 +9,7 @@ public class GreaterEqual extends RelationalOperator{
 	}
 	
 	@Override
-	public String toString(){
-		return "GreaterEqual{" + "arg1=" + arg1 + ", arg2=" + arg2 + '}';
+	public String preetyPrint(String prefix){
+		return arg1.preetyPrint(prefix) + " >= " + arg2.preetyPrint(prefix);
 	}
 }

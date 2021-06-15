@@ -29,4 +29,5 @@ public abstract class OneArgumentOperator extends Expresion{
 		result = 31 * result + (arg != null ? arg.hashCode() : 0);
 		return result;
 	}
+	
 }

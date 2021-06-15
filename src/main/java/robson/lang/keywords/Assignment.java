@@ -53,4 +53,15 @@ public class Assignment extends Expresion{
 		result = 31 * result + (local ? 1 : 0);
 		return result;
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		StringBuilder stringBuilder = new StringBuilder();
+		if(local)
+			stringBuilder.append("local ");
+		stringBuilder.append(name);
+		stringBuilder.append(" = ");
+		stringBuilder.append(value.preetyPrint(prefix));
+		return stringBuilder.toString();
+	}
 }

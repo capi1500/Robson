@@ -107,7 +107,10 @@ public class ScriptTests{
 			new TestConfig("functionCallAng", 25.0),
 			new TestConfig("access", 3.14),
 			new TestConfig("tableAccess", 4.0),
-			new TestConfig("modulo", 3.0)
+			new TestConfig("modulo", 3.0),
+			
+			new TestConfig("localFunction", 5.0),
+			new TestConfig("localVariable", 100.0)
 	};
 	private final TestConfig[] functionCallTestConfigs = new TestConfig[]{
 			new TestConfig("fib",
@@ -193,7 +196,7 @@ public class ScriptTests{
 				.waitFor();
 		
 		Scanner output = new Scanner(Path.of("out\\out.txt"));
-		assertEquals(config.getExpectedValue(), Double.parseDouble(output.nextLine()));
+		assertEquals(config.getExpectedValue(), output.nextDouble());
 		output.close();
 		
 		Files.delete(Path.of("Main.java"));

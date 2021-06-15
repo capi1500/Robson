@@ -2,6 +2,7 @@ package robson.lang.base;
 
 import com.google.gson.annotations.SerializedName;
 import robson.lang.environment.Scope;
+import robson.lang.keywords.Block;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -74,5 +75,24 @@ public class Function extends Expresion{
 		result = 31 * result + (body != null ? body.hashCode() : 0);
 		result = 31 * result + (local ? 1 : 0);
 		return result;
+	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		StringBuilder out = new StringBuilder();
+		if(local)
+			out.append("local ");
+		out.append("def " + name + "(");
+		for(String arg : argumentNames){
+			out.append(arg);
+			if(!arg.equals(argumentNames[argumentNames.length - 1]))
+				out.append(", ");
+		}
+		out.append(")");
+		if(body.getClass() != Block.class)
+			out.append("\n" + prefix + "    " + body.preetyPrint(prefix + "    "));
+		else
+			out.append(body.preetyPrint(prefix));
+		return out.toString();
 	}
 }

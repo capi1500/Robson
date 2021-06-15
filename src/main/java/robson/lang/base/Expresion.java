@@ -27,4 +27,6 @@ public abstract class Expresion{
 	public int hashCode(){
 		return type != null ? type.hashCode() : 0;
 	}
+	
+	public abstract String preetyPrint(String prefix);
 }

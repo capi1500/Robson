@@ -34,4 +34,9 @@ public class Variable extends Expresion{
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		return "var " + name;
+	}
 }

@@ -14,7 +14,7 @@ public class And extends TwoArgumentOperator{
 	}
 	
 	@Override
-	public String toString(){
-		return "And{" + "arg1=" + arg1 + ", arg2=" + arg2 + '}';
+	public String preetyPrint(String prefix){
+		return arg1.preetyPrint(prefix) + " & " + arg2.preetyPrint(prefix);
 	}
 }

@@ -91,4 +91,20 @@ public class Access extends Expresion{
 		result = 31 * result + (id != null ? id.hashCode() : 0);
 		return result;
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		StringBuilder out = new StringBuilder();
+		out.append(expresion.preetyPrint(prefix));
+		if(id != null){
+			out.append("[");
+			out.append(id.preetyPrint(prefix));
+			out.append("]");
+		}
+		else{
+			out.append(".");
+			out.append(what);
+		}
+		return out.toString();
+	}
 }

@@ -37,4 +37,14 @@ public class Environment{
 	public void add(String name, Function function){
 		functions.put(name, function);
 	}
+	
+	public void clear(){
+		variables.clear();
+		functions.clear();
+	}
+	
+	@Override
+	public String toString(){
+		return "Environment{" + "variables=" + variables + ", functions=" + functions + '}';
+	}
 }

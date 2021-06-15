@@ -45,4 +45,9 @@ public class Value extends Expresion{
 		result = 31 * result + (value != null ? value.hashCode() : 0);
 		return result;
 	}
+	
+	@Override
+	public String preetyPrint(String prefix){
+		return value.toString();
+	}
 }
