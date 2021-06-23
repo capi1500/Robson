@@ -55,13 +55,13 @@ public class Assignment extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		StringBuilder stringBuilder = new StringBuilder();
 		if(local)
 			stringBuilder.append("local ");
 		stringBuilder.append(name);
 		stringBuilder.append(" = ");
-		stringBuilder.append(value.preetyPrint(prefix));
+		stringBuilder.append(value.prettyPrint(prefix));
 		return stringBuilder.toString();
 	}
 }

@@ -29,7 +29,7 @@ public class ExpresionDeserializer implements JsonDeserializer<Expresion>{
 			case "Wywolanie", "Call" -> FunctionCall.class;
 			case "Liczba", "Wartosc", "Value" -> Value.class;
 			case "Zmienna", "Variable" -> Variable.class;
-			case "Przypisanie", "Assignment" -> Assignment.class;
+			case "Przypisanie", "Assignment", "=" -> Assignment.class;
 			case "Wez", "Access" -> Access.class;
 			case "Blok", "Block" -> Block.class;
 			case "Jesli", "Jezeli", "If" -> If.class;

@@ -11,7 +11,7 @@ public class False extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String indent){
+	public String prettyPrint(String indent){
 		return "False";
 	}
 }

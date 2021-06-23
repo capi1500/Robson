@@ -156,6 +156,6 @@ public class Robson{
 	
 	@Override
 	public String toString(){
-		return script.preetyPrint("");
+		return script.prettyPrint("");
 	}
 }

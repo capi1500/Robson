@@ -44,11 +44,11 @@ public class Block extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		StringBuilder out = new StringBuilder();
 		out.append("{\n");
 		for(Expresion expresion : instructions){
-			out.append(prefix + "    " + expresion.preetyPrint(prefix + "    ") + "\n");
+			out.append(prefix + "    " + expresion.prettyPrint(prefix + "        ") + "\n");
 		}
 		out.append(prefix + "}");
 		return out.toString();

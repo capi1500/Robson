@@ -1,0 +1,113 @@
+{
+	"typ": "Funkcja",
+	"nazwa": "szybkie_potegowanie",
+	"argumenty": [
+		"liczba",
+		"potega"
+	],
+	"instrukcja": {
+		"typ": "If",
+		"warunek": {
+			"typ": "==",
+			"argument1": {
+				"wartosc": 0.0,
+				"typ": "Liczba"
+			},
+			"argument2": {
+				"typ": "Zmienna",
+				"nazwa": "potega"
+			}
+		},
+		"blok_prawda": {
+			"typ": "Liczba",
+			"wartosc": 1
+		},
+		"blok_falsz": {
+			"typ": "Blok",
+			"instrukcje": [
+				{
+					"typ": "=",
+					"nazwa": "tmp",
+					"wartosc": {
+						"typ": "Call",
+						"nazwa": "szybkie_potegowanie",
+						"argumenty": [
+							{
+								"typ": "Zmienna",
+								"nazwa": "liczba"
+							},
+							{
+								"typ": "/",
+								"argument1": {
+									"typ": "-",
+									"argument1": {
+										"typ": "Zmienna",
+										"nazwa": "potega"
+									},
+									"argument2": {
+										"typ": "%",
+										"argument1": {
+											"typ": "Zmienna",
+											"nazwa": "potega"
+										},
+										"argument2": {
+											"typ": "Liczba",
+											"wartosc": 2
+										}
+									}
+								},
+								"argument2": {
+									"typ": "Liczba",
+									"wartosc": 2
+								}
+							}
+						]
+					}
+				},
+				{
+					"typ": "*",
+					"argument1": {
+						"typ": "*",
+						"argument1": {
+							"typ": "Zmienna",
+							"nazwa": "tmp"
+						},
+						"argument2": {
+							"typ": "Zmienna",
+							"nazwa": "tmp"
+						}
+					},
+					"argument2": {
+						"typ": "If",
+						"warunek": {
+							"typ": "==",
+							"argument1": {
+								"typ": "%",
+								"argument1": {
+									"typ": "Zmienna",
+									"nazwa": "potega"
+								},
+								"argument2": {
+									"typ": "Liczba",
+									"wartosc": 2
+								}
+							},
+							"argument2": {
+								"typ": "Liczba",
+								"wartosc": 0
+							}
+						},
+						"blok_prawda": {
+							"typ": "Liczba",
+							"wartosc": 1
+						},
+						"blok_falsz": {
+							"typ": "Zmienna",
+							"nazwa": "liczba"
+						}
+					}
+				}
+			]
+		}
+	}
+}

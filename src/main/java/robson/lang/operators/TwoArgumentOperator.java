@@ -2,6 +2,8 @@ package robson.lang.operators;
 
 import com.google.gson.annotations.SerializedName;
 import robson.lang.base.Expresion;
+import robson.lang.base.Value;
+import robson.lang.environment.Scope;
 
 import java.util.Objects;
 
@@ -10,6 +12,15 @@ public abstract class TwoArgumentOperator extends Expresion{
 	protected Expresion arg1;
 	@SerializedName(value = "argument2", alternate = {"arg2"})
 	protected Expresion arg2;
+	
+	protected abstract Object operation(Object e1, Object e2);
+	
+	@Override
+	public Value calculate(Scope scope) throws RuntimeException{
+		Value v1 = arg1.calculate(scope);
+		Value v2 = arg2.calculate(scope);
+		return new Value(operation(v1.getValue(), v2.getValue()));
+	}
 	
 	@Override
 	public boolean equals(Object o){

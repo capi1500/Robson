@@ -13,7 +13,7 @@ public class Not extends OneArgumentOperator{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
-		return "!" + arg.preetyPrint(prefix);
+	public String prettyPrint(String prefix){
+		return "!" + arg.prettyPrint(prefix);
 	}
 }

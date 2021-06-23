@@ -93,12 +93,12 @@ public class Access extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		StringBuilder out = new StringBuilder();
-		out.append(expresion.preetyPrint(prefix));
+		out.append(expresion.prettyPrint(prefix));
 		if(id != null){
 			out.append("[");
-			out.append(id.preetyPrint(prefix));
+			out.append(id.prettyPrint(prefix));
 			out.append("]");
 		}
 		else{

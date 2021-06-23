@@ -54,20 +54,21 @@ public class If extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String indent){
+	public String prettyPrint(String indent){
 		StringBuilder out = new StringBuilder();
 		out.append("if(");
-		out.append(predicate.preetyPrint(indent + "    "));
+		out.append(predicate.prettyPrint(indent + "    "));
 		out.append(")");
 		if(onTrue.getClass() != Block.class)
-			out.append("\n" + indent + "    " + onTrue.preetyPrint(indent + "    "));
+			out.append("\n" + indent + "    " + onTrue.prettyPrint(indent + "    "));
 		else 
-			out.append(onTrue.preetyPrint(indent));
+			out.append(onTrue.prettyPrint(indent));
+		
 		out.append("\n" + indent + "else");
-		if(onTrue.getClass() != Block.class)
-			out.append("\n" + indent + "    " + onFalse.preetyPrint(indent + "    "));
+		if(onFalse.getClass() != Block.class)
+			out.append("\n" + indent + "    " + onFalse.prettyPrint(indent + "    "));
 		else
-			out.append(onFalse.preetyPrint(indent));
+			out.append(onFalse.prettyPrint(indent));
 		return out.toString();
 	}
 }

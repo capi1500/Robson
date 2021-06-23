@@ -51,15 +51,15 @@ public class While extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String indent){
+	public String prettyPrint(String indent){
 		StringBuilder out = new StringBuilder();
 		out.append("while(");
-		out.append(predicate.preetyPrint(indent + "    "));
+		out.append(predicate.prettyPrint(indent + "    "));
 		out.append(")");
 		if(expresion.getClass() != Block.class)
-			out.append("\n" + indent + "    " + expresion.preetyPrint(indent + "    "));
+			out.append("\n" + indent + "    " + expresion.prettyPrint(indent + "    "));
 		else
-			out.append(expresion.preetyPrint(indent));
+			out.append(expresion.prettyPrint(indent));
 		return out.toString();
 	}
 }

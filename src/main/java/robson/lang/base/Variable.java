@@ -36,7 +36,7 @@ public class Variable extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
-		return "var " + name;
+	public String prettyPrint(String prefix){
+		return name;
 	}
 }

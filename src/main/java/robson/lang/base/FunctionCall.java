@@ -43,11 +43,11 @@ public class FunctionCall extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		StringBuilder out = new StringBuilder();
 		out.append(name + "(");
 		for(Expresion arg : arguments){
-			out.append(arg.preetyPrint(prefix));
+			out.append(arg.prettyPrint(prefix));
 			if(!arg.equals(arguments[arguments.length - 1]))
 				out.append(", ");
 		}

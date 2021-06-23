@@ -21,7 +21,6 @@ public class Function extends Expresion{
 	
 	@Override
 	public Value calculate(Scope scope) throws RuntimeException{
-		
 		if(local){
 			scope.add(name, this);
 			baseScope = new Scope(scope);
@@ -40,8 +39,9 @@ public class Function extends Expresion{
 		
 		Scope callScope = new Scope(baseScope);
 		
-		for(int i = 0; i < args.length; i++)
+		for(int i = 0; i < args.length; i++){
 			callScope.add(argumentNames[i], args[i].calculate(scope));
+		}
 		
 		return body.calculate(callScope);
 	}
@@ -61,7 +61,6 @@ public class Function extends Expresion{
 			return false;
 		if(!Objects.equals(name, function.name))
 			return false;
-		// Probably incorrect - comparing Object[] arrays with Arrays.equals
 		if(!Arrays.equals(argumentNames, function.argumentNames))
 			return false;
 		return Objects.equals(body, function.body);
@@ -78,7 +77,7 @@ public class Function extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		StringBuilder out = new StringBuilder();
 		if(local)
 			out.append("local ");
@@ -90,9 +89,9 @@ public class Function extends Expresion{
 		}
 		out.append(")");
 		if(body.getClass() != Block.class)
-			out.append("\n" + prefix + "    " + body.preetyPrint(prefix + "    "));
+			out.append("\n" + prefix + "    " + body.prettyPrint(prefix + "    "));
 		else
-			out.append(body.preetyPrint(prefix));
+			out.append(body.prettyPrint(prefix));
 		return out.toString();
 	}
 }

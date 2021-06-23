@@ -9,7 +9,7 @@ public class Divide extends ArithmeticOperator{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
-		return arg1.preetyPrint(prefix) + " / " + arg2.preetyPrint(prefix);
+	public String prettyPrint(String prefix){
+		return arg1.prettyPrint(prefix) + " / " + arg2.prettyPrint(prefix);
 	}
 }

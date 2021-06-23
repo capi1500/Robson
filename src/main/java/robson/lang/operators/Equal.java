@@ -1,16 +1,17 @@
 package robson.lang.operators;
 
-import robson.lang.base.Value;
-import robson.lang.environment.Scope;
+import utils.TypeCheck;
 
 public class Equal extends TwoArgumentOperator{
 	@Override
-	public Value calculate(Scope scope) throws RuntimeException{
-		return new Value(arg1.calculate(scope).equals(arg2.calculate(scope)));
+	protected Boolean operation(Object e1, Object e2){
+		if(TypeCheck.isType(e1, Number.class) && TypeCheck.isType(e2, Number.class))
+			return ((Number)e1).doubleValue() == ((Number)e2).doubleValue();
+		return e1.equals(e2);
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
-		return arg1.preetyPrint(prefix) + " == " + arg2.preetyPrint(prefix);
+	public String prettyPrint(String prefix){
+		return arg1.prettyPrint(prefix) + " == " + arg2.prettyPrint(prefix);
 	}
 }

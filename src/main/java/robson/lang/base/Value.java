@@ -47,7 +47,7 @@ public class Value extends Expresion{
 	}
 	
 	@Override
-	public String preetyPrint(String prefix){
+	public String prettyPrint(String prefix){
 		return value.toString();
 	}
 }
